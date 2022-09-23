@@ -34,7 +34,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     invariant(params.slug, 'slug is required')
 
     if (params.slug === 'new') {
-        json<LoaderData>({}) 
+        return json<LoaderData>({}) 
     }
 
     // const html = post.html()
