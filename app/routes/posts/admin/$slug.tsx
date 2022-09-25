@@ -16,15 +16,6 @@ import type { LoaderFunction, ActionFunction } from "@remix-run/node";
 import type { Post } from '~/models/post.server'
 import { useEffect } from "react";
 
-type ActionData =
-    |
-    {
-        title: null | string;
-        slug: null | string;
-        markdown: null | string;
-    }
-    | undefined;
-
 const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`;
 
 type LoaderData = { post?: Post }
@@ -44,6 +35,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
     return json<LoaderData>({ post })
 }
+
+type ActionData =
+    |
+    {
+        title: null | string;
+        slug: null | string;
+        markdown: null | string;
+    }
+    | undefined;
 
 export const action: ActionFunction = async ({ request, params }) => {
     // TODO: remove me

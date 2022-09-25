@@ -4,6 +4,7 @@ import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+// import { getEnv } from '~/env.server'
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -66,6 +67,7 @@ export async function requireUser(request: Request) {
 
 export async function requireAdminUser(request: Request) {
   const user = await requireUser(request)
+  // const ENV = getEnv()
   if (user.email !== ENV.ADMIN_EMAIL) {
     throw await logout(request)
   }

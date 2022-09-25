@@ -14,10 +14,10 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
 
-// type LoaderData = {
-//   user: Awaited<ReturnType <typeof getUser>>;
-//   ENV: Awaited<ReturnType <typeof getEnv>>;
-// }
+type LoaderData = {
+  user: Awaited<ReturnType <typeof getUser>>;
+  ENV: ReturnType <typeof getEnv>;
+}
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -30,9 +30,9 @@ export const meta: MetaFunction = () => ({
 });
 
 export async function loader({ request }: LoaderArgs) {
-  console.log('-----fromServer----', ENV);
+  // console.log('-----fromServer----', ENV);
   
-  return json({
+  return json<LoaderData>({
     user: await getUser(request),
     ENV: getEnv()
   });
@@ -40,7 +40,8 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function App() {
   const data = useLoaderData()
-  console.log('-----fromApp----', ENV);
+  // console.log('-----fromApp----', ENV);
+  // console.log('-----fromApp data.env----', data.ENV);
   
   return (
     <html lang="en" className="h-full">

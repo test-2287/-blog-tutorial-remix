@@ -2,6 +2,7 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
 import type { User } from "~/models/user.server";
+// import { getEnv } from "./env.server";
 
 const DEFAULT_REDIRECT = "/";
 
@@ -68,6 +69,7 @@ export function useUser(): User {
 
 export function useOptionalAdminUser() {  
   const user = useOptionalUser()
+  // const ENV = getEnv()
   if (!user ) return null
   if (user.email !== ENV.ADMIN_EMAIL) return null
   return user 

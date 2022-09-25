@@ -14,4 +14,4 @@ declare global {
     interface Window {
         ENV: ENV
     }
-}
+}   
